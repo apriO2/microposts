@@ -1,9 +1,6 @@
 class UsersController < ApplicationController
-  before_action: only:[:edit, :update]
-  
-  def show
-    @user = User.find(params[:id])
-  end
+  before_action :set_user, only:[:edit, :update, :show]
+  before_action :auth_user!, only:[:edit, :update]
   
   def new
     @user = User.new
@@ -20,13 +17,14 @@ class UsersController < ApplicationController
   end
   
   def edit
-    @user = User.find(params[:id])
   end
+  
   
   def update
     if @user.update(user_params)
+       flash[:success]= "プロフィールを編集しました"
       #保存に成功した場合は、自分のページへ移動する
-      redirect_to show ,notice:"プロフィールを編集しました"
+      redirect_to @user
     else
       render 'edit'
     end
@@ -34,6 +32,17 @@ class UsersController < ApplicationController
   
     
   private
+  def set_user
+    @user = User.find(params[:id]) 
+  end
+  
+  def auth_user! 
+    if current_user != @user
+      flash[:danger]= "不正なアクセスです"
+      redirect_to root_url
+    end
+  end
+  
   
   def user_params
     params.require(:user).permit(:name, :email, :password,

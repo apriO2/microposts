@@ -1,4 +1,4 @@
-<header class="navber navbar-fixed-top navbar-inverse">
+<header class="navbar navbar-fixed-top navbar-inverse">
   <div class="container">
     <% link_to "Misroposts" , root_path ,id: "logo" %>
     <nav>
@@ -12,11 +12,11 @@
               Account <b class="caret"></b>
             </a>
             <ul class="dropdown-menu">
-              <li><%= link_to "Profile",current_user %></li>
-              <li><%= link_to "Settings", '#' %></li>
+              <li><%= link_to "Profile", current_user %></li>
+              <li><%= link_to "Settings", edit_user_path(current_user) %></li>
               <li class="divider"></li>
               <li>
-                <%= link_to "Log out" , logout_path, method:"delete" %>
+                <%= link_to "Log out" , logout_path, method: "delete" %>
               </li>
             </ul>
           </li>
