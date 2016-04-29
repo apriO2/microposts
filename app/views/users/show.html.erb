@@ -2,3 +2,31 @@
     <%= gravatar_for @user %>
     <%= @user.name %>
 </h1>
+
+<div class="panel panel-default">
+  <div class="panel-heading"></div>
+  プロフィール編集画面
+</div>
+
+<div class="panel-body">
+  <%= form_for(@user) do |f| %>
+  
+  名前
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+  
+  
+  メールアドレス
+  <%= f.label :email %>
+  <%= f.text_field :email %>
+  
+  プロフィール
+  <%= f.label :profile %>
+  <%= f.text_field :profile %>
+  
+  
+  地域
+  <%= f.label :location %>
+  <%= f.text_field :location %>
+  
+</div>
